@@ -6,9 +6,11 @@ class Solution {
             int MultiSum = 1;
             p2 = p1;
             while(p2 < nums.length){
-                
-                MultiSum *=  nums[p2]; 
-                
+                if(p1 == p2){
+                    MultiSum = nums[p1];
+                }else{
+                    MultiSum *= nums[p2]; 
+                }
                 if(MultiSum < k){
                     count++;
                     p2++;
