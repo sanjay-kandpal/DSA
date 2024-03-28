@@ -4,15 +4,15 @@ class Solution {
             return grid[m][n];
         }
         if (m < 0 || n < 0) {
-            return Integer.MAX_VALUE;
+            return (int) Math.pow(10, 9);
         }
         if(memo[m][n] != -1){
             return memo[m][n];
         }
-        int up = recurMin(m - 1, n, grid,memo);
-        int left = recurMin(m, n - 1, grid,memo);
+        int up = grid[m][n]+recurMin(m - 1, n, grid,memo);
+        int left =grid[m][n] + recurMin(m, n - 1, grid,memo);
         int min = Math.min(up, left); // Calculate the minimum of up and left paths
-        return memo[m][n] = min + grid[m][n]; // Add current cell value to the minimum path
+        return memo[m][n] = min; // Add current cell value to the minimum path
     }
 
     public int minPathSum(int[][] grid) {
