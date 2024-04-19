@@ -1,4 +1,5 @@
 class Solution {
+//    DFS
     public int ans(int i, int j, int[][] grid, boolean[][] visited) {
         if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || grid[i][j] == 0) {
             return 1;
@@ -20,14 +21,19 @@ class Solution {
     }
     
     public int islandPerimeter(int[][] grid) {
-        boolean[][] visited = new boolean[grid.length][grid[0].length];
+        int perimeter = 0;
+        
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == 1) {
-                    return ans(i, j, grid, visited);
+                    perimeter += 4; // Assume full perimeter
+                    // Check each neighbor, subtract if neighbor is also land
+                    if (i > 0 && grid[i - 1][j] == 1) perimeter -= 2;
+                    if (j > 0 && grid[i][j - 1] == 1) perimeter -= 2;
                 }
             }
         }
-        return 0; // no island found
+        
+        return perimeter;
     }
 }
