@@ -11,8 +11,10 @@ class Solution {
         // Concatenate the original array with itself to handle rotations
         int[] concatenatedArr = new int[nums.length * 2];
         for (int i = 0; i < nums.length; i++) {
-            concatenatedArr[i] = concatenatedArr[i + nums.length] = nums[i];
-        }
+    concatenatedArr[i] = nums[i]; // Assign to the first copy
+    concatenatedArr[i + nums.length] = nums[i]; // Assign to the second copy
+}
+
 
         // Check if the sorted copy is included in the concatenated array
         for (int i = 0; i <= concatenatedArr.length - copy.length; i++) {
