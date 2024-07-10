@@ -1,23 +1,20 @@
 class Solution {
     public int minOperations(String[] logs) {
-        int count = 0;
-        int i = 0;
-        while( i < logs.length){
-            if(!logs[i].equals("../") && !logs[i].equals("./")){
-                count++;
-                i++;
-            }else if(logs[i].equals("../")){
-                if(count > 0){
-                    count--;
+        Stack<String> folderStack = new Stack<>();
+
+        for(String currentOperation : logs){
+            if(currentOperation.equals("../")){
+                // Move up to parent directory if not already at main folder
+                if(!folderStack.empty()){
+                    folderStack.pop();
                 }
-                i++;
+            }else if(!currentOperation.equals("./")){
+                // Enter a new Folder
+                folderStack.push(currentOperation);
             }
-            else{
-                i++;
-            }
+            // Ignore "./" operations as they don't change the current folder
         }
-        
-        return count;
-        
+        // The stack size represents the number of folders deep we are
+        return folderStack.size();
     }
 }
